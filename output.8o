@@ -19,14 +19,14 @@
 
 :macro update_player_bounds {
 
-		# Update the player right
-		# and bottom bounds
+	# Update the player right
+	# and bottom bounds
 
-		pr := px
-		pr += 4
+	pr := px
+	pr += 4
 
-		pb := py
-		pb += 7
+	pb := py
+	pb += 7
 }
 
 :macro teleport_left_door {
@@ -55,28 +55,28 @@
 	sprite v5 v6 9
 
 	ex := random 0b0011111
-  ey := random 0b0001111
+	ey := random 0b0001111
 	i := enemy
 	sprite ex ey 8
 
-  px := random 0b0011111
-  py := random 0b0001111
+  	px := random 0b0011111
+  	py := random 0b0001111
 
 	update_player_bounds
 
-  i  := person
-  sprite px py 8
+  	i  := person
+  	sprite px py 8
 
-  loop
-    # erase the player, update its position and then redraw:
-    sprite px py 8
+  	loop
+		# erase the player, update its position and then redraw:
+		sprite px py 8
 
-    v0 := OCTO_KEY_W if v0 key begin
+		v0 := OCTO_KEY_W if v0 key begin
 			if py > 0 then py += -1
 			end
 
 		v0 := OCTO_KEY_S if v0 key begin
-    	if py < 24 then py += 1
+			if py < 24 then py += 1
 			end
 
 
@@ -114,16 +114,18 @@
 			end
 
 		update_player_bounds
-    sprite px py 8
+		sprite px py 8
 
-    # lock the framerate of this program via the delay timer:
-    loop
-      vf := delay
-      if vf != 0 then
-    again
-    vf := 3
-    delay := vf
-  again
+		# lock the framerate of this program via the delay timer:
+		loop
+			vf := delay
+			if vf != 0 then
+		again
+
+		vf := 3
+		delay := vf
+
+	again
 
 
 : person
