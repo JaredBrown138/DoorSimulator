@@ -1,2 +1,2 @@
 # DoorSimulator
-Ever wanted to be a door for a day?
+Ever wanted to play with doors all day?
