@@ -1,0 +1,139 @@
+﻿###################################
+#
+#	Door Simulator
+#	Jared Brown
+#	2020
+#
+###################################
+
+
+:alias px v1
+:alias py v2
+
+:alias ex v3
+:alias ey v4
+
+:alias pr v9
+:alias pb vA
+
+
+:macro update_player_bounds {
+
+		# Update the player right
+		# and bottom bounds
+
+		pr := px
+		pr += 4
+
+		pb := py
+		pb += 7
+}
+
+:macro teleport_left_door {
+	py := 11
+	px := 2
+}
+
+:macro teleport_right_door {
+	py := 11
+	px := 57
+}
+
+
+: main
+
+	v5 := 0x3E
+	v6 := 11
+
+	i := door_right
+	sprite v5 v6 9
+
+	v5 := 0x00
+	v6 := 0x0B
+
+	i := door_left
+	sprite v5 v6 9
+
+	ex := random 0b0011111
+  ey := random 0b0001111
+	i := enemy
+	sprite ex ey 8
+
+  px := random 0b0011111
+  py := random 0b0001111
+
+	update_player_bounds
+
+  i  := person
+  sprite px py 8
+
+  loop
+    # erase the player, update its position and then redraw:
+    sprite px py 8
+
+    v0 := OCTO_KEY_W if v0 key begin
+			if py > 0 then py += -1
+			end
+
+		v0 := OCTO_KEY_S if v0 key begin
+    	if py < 24 then py += 1
+			end
+
+
+		v0 := OCTO_KEY_A if v0 key begin
+			if px > 0 then px += -1
+			if px < 2 begin
+
+				if py < 15 begin
+
+					if py > 6 begin
+
+						teleport_right_door
+
+						end
+
+					end
+
+				end
+
+			end
+
+		v0 := OCTO_KEY_D if v0 key begin
+			if px < 59 then px += 1
+			if pr > 60 begin
+				if py < 15 begin
+
+					if py > 6 begin
+
+						teleport_left_door
+
+						end
+
+					end
+				end
+			end
+
+		update_player_bounds
+    sprite px py 8
+
+    # lock the framerate of this program via the delay timer:
+    loop
+      vf := delay
+      if vf != 0 then
+    again
+    vf := 3
+    delay := vf
+  again
+
+
+: person
+  0x70 0x70 0x20 0x70 0xA8 0x20 0x50 0x50
+
+: enemy
+  0x70 0x70 0x20 0x70 0xA8 0x20 0x50 0x50
+
+: door_right
+	0x40 0xC0 0xC0 0xC0 0xC0 0xC0 0xC0 0x40 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+
+: door_left
+	0x80 0xC0 0xC0 0xC0 0xC0 0xC0 0xC0 0x80 0x00 0x00 0x00 0x00 0x00 0x00 0x00
