@@ -12,12 +12,13 @@ hound = require('hound');
 childProcess = require('child_process');
 
 const OCTO_FILE = "./doorsim.8o";
-const OCTO_CLI = "./local_packages/Octo/octo"
-const OCTO_COMPILE_TARGET = "./index.html"
+const OCTO_CLI = "./local_packages/Octo/octo";
+const OCTO_COMPILE_TARGET = "./index.html";
+const OPTIONS_FILE = "./build_options.json";
 
-function compileProgram(cli, octoFile, target, callback){
+function compileProgram(cli, optionsFile, octoFile, target, callback){
     var invoked = false;
-    var process = childProcess.fork(cli, [octoFile, target]);
+    var process = childProcess.fork(cli, ["--options", optionsFile, octoFile, target]);
 
     process.on('error', function (err) {
         if (invoked) return;
@@ -36,7 +37,7 @@ function compileProgram(cli, octoFile, target, callback){
 watcher = hound.watch(OCTO_FILE);
 
 watcher.on('change', function(file, stats) {
-    compileProgram(OCTO_CLI, OCTO_FILE, OCTO_COMPILE_TARGET, function(err){
+    compileProgram(OCTO_CLI, OPTIONS_FILE, OCTO_FILE, OCTO_COMPILE_TARGET, function(err){
         if (err){
             console.log(err)
         }else{
