@@ -13,7 +13,7 @@ childProcess = require('child_process');
 
 const OCTO_FILE = "./doorsim.8o";
 const OCTO_CLI = "./local_packages/Octo/octo"
-const OCTO_COMPILE_TARGET = "./doorsim.html"
+const OCTO_COMPILE_TARGET = "./index.html"
 
 function compileProgram(cli, octoFile, target, callback){
     var invoked = false;
