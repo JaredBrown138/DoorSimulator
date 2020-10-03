@@ -1,0 +1,23 @@
+{
+  "name": "doorsimulator",
+  "version": "1.0.0",
+  "description": "A door simulator game written with Octo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaredBrown138/DoorSimulator.git"
+  },
+  "author": "Jared Brown",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JaredBrown138/DoorSimulator/issues"
+  },
+  "homepage": "https://github.com/JaredBrown138/DoorSimulator#readme",
+  "dependencies": {
+    "hound": "^1.0.5"
+  }
+}
